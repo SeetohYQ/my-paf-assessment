@@ -1,0 +1,31 @@
+<form [formGroup]="uploadForm" (ngSubmit)="onSubmit()" style="display:flex; flex-direction: column;"> 
+    <h2>Song Upload</h2>
+
+    <input matInput placeholder="Title" type="text" formControlName="title">
+
+    <mat-form-field>
+        <mat-label>Country</mat-label>
+        <mat-select formControlName="country">
+            <mat-option *ngFor="let country of countries" [value]="country">
+            {{country}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Listen Slots</mat-label>
+        <mat-select formControlName="listenSlots">
+            <mat-option *ngFor="let slot of slots" [value]="slot">
+            {{slot}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <textarea matInput placeholder='Song lyrics' formControlName="lyrics" rows="5" cols="5"></textarea>
+          
+    <mat-label>MP3 File</mat-label>
+    <input type="file" formControlName="mp3File" (change)="newFile($event)"/>
+
+    <button mat-raised-button color="primary" type="submit" [disabled]="this.uploadForm.invalid">Upload</button>
+  </form>
+  

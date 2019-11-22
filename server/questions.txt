@@ -1,0 +1,44 @@
+Task 1
+Write your schemas below. Consider your MySQL database as part of the given music database.
+
+create table music_list (
+	music_id varchar(8) not null,
+    music_url varchar(128) not null,
+    lyrics text,
+    listening_slots int not null default 3,
+    song_title varchar(128) not null,
+    country varchar(8) not null,
+    primary key (music_id)
+);
+
+create table music_listeners (
+	music_id varchar(8) not null,
+    user_id varchar(8) not null,
+    checkout timestamp not null on update current_timestamp,
+    listening_status boolean not null default true,
+    
+    primary key(music_id, user_id),
+    constraint fk_music_id foreign key(music_id) references music_list(music_id),
+    constraint fk_user_id foreign key(user_id) references users(user_id)
+);
+
+insert into music_listeners (music_id, user_id, checkout, listening_status) values ('b87b00fe', '4d0cae84',current_timestamp, 1);
+insert into music_listeners (music_id, user_id, checkout, listening_status) values ('b87b00fe', '26a85b1c',current_timestamp, 1);
+insert into music_listeners (music_id, user_id, checkout, listening_status) values ('c0b27ecb', '675cee52',current_timestamp, 1);
+insert into music_listeners (music_id, user_id, checkout, listening_status) values ('c0b27ecb', '27b965f6',current_timestamp, 1);
+
+Explain briefly your choice of persistence store.
+
+For the audio files, in view of their file size (higher cost/byte), I have decided to store them in AWS S3 spaces store. The files will be
+served by AWS S3 directly when user lands on the page after clicking 'Listen'.
+
+As for the other required data, I have stored them in MySQL relational database (tables creation, with some mock data shown above). 
+This is considering the transactional nature of the data which has to be updated and retrieved accurately and quickly. 
+Audio file url is also stored for ease of retrieval, but the actual file will be served by AWS S3. 
+
+Task 7
+Using the information capture by your application's data model and the database connections/pool declared in your application, show using JavaScript, the ranking of national anthems by their listening popularity across your service's user base. You should rank your the songs from the most popular to the least popular. The ranking information must include the following 
+- song name
+- number of the times it was listen
+- the last time (date and time) the song was listen
+

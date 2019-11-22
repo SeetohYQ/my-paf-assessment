@@ -1,0 +1,28 @@
+<div *ngIf='music'>
+    <div style="display: flex; justify-content: space-evenly;">
+        <div>
+            <img src = 'http://localhost:3000/api/flag/{{music.country}}' style="max-height: 100%;
+            max-width: 100%;">
+        </div>
+        <div>
+            <h2>{{music.song_title}}</h2>
+            <audio controls>
+                <source src = 'https://free-music.sgp1.digitaloceanspaces.com/anthem/{{music.music_url}}' type='audio/mp3'>
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+    </div>
+    <div style="display: flex; justify-content: space-evenly;">
+        <div style="display: flex; flex-direction:column;">
+            <div style="height:50vh;width:75vw;border:1px solid #4e4e4e;font:16px Arial, Serif;overflow:auto;">
+                {{music.lyrics}}
+            </div>
+            <div>
+                <span>Played: {{music.playTimes}}</span>
+            </div>
+            <div>
+                <button type="button" (click)="return()">Back</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,21 @@
+<!--The content below is only a placeholder and can be replaced.-->
+<mat-toolbar color="primary">Music Streaming
+        <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+        <button mat-menu-item [routerLink]="['/list/upload']">
+            <span>Upload Song</span>
+        </button>
+        <button mat-menu-item [routerLink]="['/list']">
+            <span>All Songs</span>
+        </button>
+        <button mat-menu-item [routerLink]="['/songs']">
+            <span>Available Songs</span>
+        </button>
+        </mat-menu>
+</mat-toolbar>
+
+<div style="margin-left:10vw; margin-right:10vw">
+    <router-outlet></router-outlet>
+</div>

@@ -1,0 +1,28 @@
+<span>Logged in as: {{user}}</span>
+<div>
+        <h2>Available Songs for Listening</h2>
+        <table style="text-align: center">
+            <thead>
+                <tr>
+                    <th>Flag</th>
+                    <th>Title</th>
+                    <th>Country</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let music of musicList; let i = index;">
+                    <td><img src = 'http://localhost:3000/api/flag/{{music.country}}' style="max-width: 50px;"></td>
+                    <td>{{music.song_title}}</td>
+                    <td>{{music.country}}</td>
+                    <td>
+                        <div>
+                            <button type ="button" *ngIf="music.checked_out !== music.listening_slots;"
+                            (click)="checkOut(i)">Listen</button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
